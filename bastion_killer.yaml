@@ -10,13 +10,14 @@ Parameters:
     Description: region only 1 region supported
     Type: String
   StopScheduled:
-    Default: cron(0 18 ? * MON-FRI *)
-    Description: enter an Schedule expression example cron(0 6 * * ? *) every day at 11PM  see https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
+    Default: cron(0 6 * * ? *)
+    Description: Enter a Schedule expression example cron(0 6 * * ? *) every day at 11PM  see https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
     Type: String
 
 Resources:
   StopEC2Instances:
     Type: AWS::Lambda::Function
+    Description: Lambda to kill the bastion host
     Properties:
       FunctionName: bastion-killer
       Runtime: python3.8
