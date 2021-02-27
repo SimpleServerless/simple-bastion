@@ -1,0 +1,1 @@
+aws cloudformation deploy --template-file bastion_killer.yaml --stack-name "bastion-killer" --capabilities CAPABILITY_IAM
