@@ -21,10 +21,8 @@ Hope this is helped you out.
 
 1. Install cdk cli https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html
 2. Configure your AWS credentials on your local shell
-3. Set a parameter in System Manager named "VpcId". This is used during deployment determine what VPC the bastion host is deployed to.
-
-```vpc_id: str = ssm.get_parameter(Name="VpcId")['Parameter']['Value']``` 
-
+3. Set a parameter in System Manager named "VpcId". 
+   This is used during deployment determine what VPC the bastion host is deployed to.`vpc_id: str = ssm.get_parameter(Name="VpcId")['Parameter']['Value']`
 4. Run the command "cdk deploy"
 
 ### Upload a public key to bastion host
