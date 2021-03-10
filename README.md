@@ -24,6 +24,7 @@ Hope this is helped you out.
 3. Set a parameter in System Manager named "VpcId". This is used during deployment determine what VPC the bastion host is deployed to.
 
 ```vpc_id: str = ssm.get_parameter(Name="VpcId")['Parameter']['Value']``` 
+
 4. Run the command "cdk deploy"
 
 ### Upload a public key to bastion host
