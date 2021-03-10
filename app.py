@@ -32,7 +32,8 @@ class CdkStack(core.Stack):
             subnet_selection=SubnetSelection(subnet_type=SubnetType.PUBLIC),
             security_group=self.security_group,
         )
-        core.CfnOutput(self, 'bastion-id', value=bastion.instance_id)
+        core.CfnOutput(self, 'bastion-id-output', value=bastion.instance_id, export_name="BastionInstanceId")
+        core.CfnOutput(self, "bastion-sg-output", value=self.security_group.security_group_id, export_name="BastionSG")
 
     def __create_security_group(self, vpc: Vpc) -> SecurityGroup:
         return SecurityGroup(

@@ -1,6 +1,21 @@
 # Simple Bastion
 
-### This project uses CDK to deploy a t3a.nano ($3.50/month) bastion host for the purpose of tunneling to an RDS instance on a public subnet.
+If you're at home building a simple serverless API on AWS that uses an RDS database hopefully your database
+is on a private subnet and protected from Internet access. This means you may be looking for a simple but cheap way to deploy
+and run a bastion host that you can tunnel through to your database. I was there once and had a hard time finding a nice
+turnkey solution so I made this project, hope it helps. If you need help deploying a low cost RDS database to your
+VPC I have something else you might want to check out [here](https://github.com/SimpleServerless/simple-database).
+
+This project uses CDK to deploy a t3a.nano ($3.50/month) bastion host for the purpose of tunneling to an RDS instance on a private subnet.
+Because I'm too cheap to pay even $3.50/month there is also a CloudFormation template `bastion_killer.yaml` that deploys 
+a lambda that will kill your bastion host every night at 11:00 MST. Finally the script `start_bastion.sh` contains
+the command needed to restart your bastion host from your shell. So if you start the bastion at 7:00 three nights a week and work
+a couple hours or until bastion_killer shuts down the bastion host your EC2 bill will be about $0.23/month.  
+
+Also I'm certainly too cheap to pay $30/month for a NAT instance to pipe access from my bastion host my database on a private subnet
+so I set up VPC endpoints which are a fraction of the cost of a NAT instance. [VPC Endpoints](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/vpc-interface-endpoints.html)
+
+Hope this is helped you out.
 
 ### How to deploy bastion host
 
@@ -43,3 +58,8 @@ export DB_HOST=my-database-name.cluster-cw3bjgnjhzxa.us-east-2.rds.amazonaws.com
 ```
 psql -h localhost -d my_database_name -U admin_user -W
 ```
+
+### How to deploy bastion_killer
+1. Install the AWS CLI
+2. Configure your AWS credentials AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY...
+3. run bastion_killer_deploy.sh `bastion_killer_deploy.sh`
