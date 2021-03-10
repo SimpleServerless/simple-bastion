@@ -61,4 +61,4 @@ psql -h localhost -d my_database_name -U admin_user -W
 ### How to deploy bastion_killer
 1. Install the AWS CLI
 2. Configure your AWS credentials AWS_DEFAULT_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY...
-3. run bastion_killer_deploy.sh `bastion_killer_deploy.sh`
+3. run bastion_killer_deploy.sh `./bastion_killer_deploy.sh`
